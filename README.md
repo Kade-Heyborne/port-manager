@@ -71,7 +71,7 @@ port-manager kill-force 8000
 Install test dependencies and run `pytest`:
 
 ```bash
-pip install .[test]
+pip install .[dev]
 pytest
 ```
 
@@ -104,16 +104,23 @@ port-manager check 8000
 
 ## 📄 Manpage
 
-### Installing the manpage
+### Installing the manpage system-wide (Linux)
 
-To install the manpage system-wide (Linux):
+You can install the provided manpage manually using the Makefile:
 
 ```bash
-sudo install -Dm644 man/port-manager.1 /usr/share/man/man1/port-manager.1
+make install-man
+````
+
+Or directly with:
+
+```bash
+sudo cp man/port-manager.1 /usr/share/man/man1/
+sudo gzip -f /usr/share/man/man1/port-manager.1
 sudo mandb
 ```
 
-You can view the CLI manual with:
+Once installed, view the manual with:
 
 ```bash
 man port-manager

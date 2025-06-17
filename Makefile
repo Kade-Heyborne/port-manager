@@ -14,7 +14,6 @@ help:
 	@echo ""
 	@echo "Targets:"
 	@echo "  install-dev   Install dev dependencies"
-	@echo "  manpage       Generate troff manpage from Markdown"
 	@echo "  install-man   Install manpage to system"
 	@echo "  test          Run unit tests with pytest"
 	@echo "  clean         Remove build artifacts"
@@ -22,11 +21,7 @@ help:
 install-dev:
 	$(PIP) install .[dev]
 
-manpage:
-	@echo "Generating manpage from Markdown..."
-	mandown $(MAN_MD) > $(MAN)
-
-install-man: manpage
+install-man:
 	@echo "Installing manpage system-wide..."
 	sudo cp $(MAN) /usr/share/man/man1/
 	sudo gzip -f /usr/share/man/man1/port-manager.1
