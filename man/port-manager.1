@@ -1,0 +1,63 @@
+.TH PORT-MANAGER 1 "June 2025" "1.0.0" "User Commands"
+.SH NAME
+port-manager \- CLI tool to check and kill processes listening on ports
+.SH SYNOPSIS
+.B port-manager
+[\fICOMMAND\fR] \fIPORT\fR
+
+.SH DESCRIPTION
+\fBport-manager\fR is a command-line tool written in Python that allows users to inspect and manage processes listening on network ports. It can check whether a port is in use and terminate the associated process either gracefully or forcefully.
+
+.SH COMMANDS
+.TP
+\fBcheck \fIPORT\fR
+Check if the given port is in use. Displays the process name and PID if found.
+
+.TP
+\fBkill \fIPORT\fR
+Gracefully terminate the process listening on the specified port using SIGTERM.
+
+.TP
+\fBkill-force \fIPORT\fR
+Forcefully kill the process using the specified port with SIGKILL.
+
+.SH EXAMPLES
+.TP
+Check if port 8000 is in use:
+.B
+port-manager check 8000
+
+.TP
+Gracefully terminate the process on port 3000:
+.B
+port-manager kill 3000
+
+.TP
+Force kill process on port 5000:
+.B
+port-manager kill-force 5000
+
+.SH WARNINGS
+On POSIX systems, some operations (especially process termination) may require root permissions. If access is denied, try re-running with \fBsudo\fR.
+
+.SH INSTALLATION
+To install the CLI:
+
+.B
+pip install .
+
+To install the manpage:
+
+.B
+sudo cp man/port-manager.1 /usr/share/man/man1/ && sudo gzip -f /usr/share/man/man1/port-manager.1
+
+.SH SEE ALSO
+.BR kill (1),
+.BR lsof (8),
+.BR fuser (1)
+
+.SH AUTHOR
+Written by Kade Heyborne (@kade-heyborne).
+
+.SH LICENSE
+MIT License.

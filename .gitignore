@@ -1,0 +1,12 @@
+# Build and packaging
+build/
+dist/
+*.egg-info/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.pytest_cache/
+.cache/
+.coverage

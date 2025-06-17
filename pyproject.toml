@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "port-manager"
+version = "1.0.0"
+description = "A CLI tool for managing processes bound to TCP ports"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+  {name = "Kade Heyborne", email = "kade@2at.tech"}
+]
+keywords = ["cli", "port", "process", "psutil", "network"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: MacOS"
+]
+dependencies = [
+  "psutil >= 5.9.0"
+]
+
+
+[project.optional-dependencies]
+test = [
+  "pytest >= 7.0",
+  "pytest-cov"
+]
+
+[project.scripts]
+port-manager = "port_manager.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["tests*"]
+
