@@ -186,6 +186,58 @@ make clean
 
 ---
 
+## 🐛 Troubleshooting
+
+### Common Issues and Solutions
+
+#### Permission Denied Errors
+**Error:** `🚫 Access denied to terminate PID XXX. Use sudo.`
+
+**Solution:** Run the command with `sudo`:
+```bash
+sudo port-manager kill 8080
+```
+
+**Why this happens:** The process belongs to another user or requires elevated privileges to terminate.
+
+#### Port Still in Use After Kill
+**Error:** Process terminated but port still shows as bound.
+
+**Solution:**
+1. Wait a few seconds for the OS to release the port binding
+2. Check if another process has taken the port
+3. Use `netstat -tlnp | grep :PORT` or `ss -tlnp | grep :PORT` to see current port usage
+
+#### Process Doesn't Respond to SIGKILL
+**Error:** `❌ Process XXX did not respond to SIGKILL within Xs.`
+
+**Solution:** This indicates a serious system issue:
+1. The process might be in uninterruptible sleep (D state)
+2. Check system logs: `dmesg | tail`
+3. Try again after a system reboot
+4. Check for kernel bugs or hardware issues
+
+#### No Process Found on Port
+**Error:** `❌ No process found using port XXX.`
+
+**Solution:**
+1. Verify the port number is correct
+2. Check if the service is actually running: `ps aux | grep service_name`
+3. Use `netstat -tlnp | grep :PORT` to see what's actually listening
+4. The port might be bound by the kernel or a different type of socket
+
+#### JSON Output Shows Extra Warnings
+**Issue:** JSON output includes ANSI color codes or warning messages.
+
+**Solution:** The tool suppresses warnings when `--json` flag is used. If you still see them, ensure you're using the latest version.
+
+#### Force Kill Takes Longer Than Expected
+**Issue:** `kill-force` command seems slow or shows progress indicator.
+
+**Solution:** This is normal behavior. The tool waits up to 3 seconds for the port to be released after killing the process. Use `--port-wait-timeout` to adjust this.
+
+---
+
 ## 📜 License
 
 MIT License.
